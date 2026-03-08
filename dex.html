@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>D EXUBERANCE | Global Experiential Agency & Strategic MICE</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        :root {
+            --dex-red: #C51F26; 
+            --dex-black: #080808;
+            --dex-gray: #1A1A1A;
+        }
+        body { font-family: 'Inter', sans-serif; background-color: var(--dex-black); color: #F8F9FA; }
+        .serif { font-family: 'Playfair Display', serif; }
+        .glass-nav { 
+            background: rgba(8, 8, 8, 0.98); 
+            backdrop-filter: blur(20px); 
+            border-bottom: 1px solid rgba(197, 31, 38, 0.3); 
+            height: 90px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .text-dex-red { color: var(--dex-red); }
+        .bg-dex-red { background-color: var(--dex-red); }
+        .border-dex-red { border-color: var(--dex-red); }
+        
+        /* Prominent Logo Styling */
+        .brand-logo-container {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            transition: all 0.3s ease;
+        }
+        .brand-logo-img {
+            height: 54px; /* Increased size */
+            width: auto;
+            display: block;
+            filter: drop-shadow(0 0 10px rgba(197, 31, 38, 0.2));
+        }
+        .brand-logo-container:hover {
+            transform: scale(1.02);
+        }
+        .brand-logo-container:hover .brand-logo-img {
+            filter: drop-shadow(0 0 15px rgba(197, 31, 38, 0.5));
+        }
+
+        .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s cubic-bezier(0.22, 1, 0.36, 1); }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+        
+        .parallax-bg { transform: scale(1.1); transition: transform 0.5s ease-out; }
+        
+        .service-card {
+            background: linear-gradient(145deg, #121212, #080808);
+            border: 1px solid #222;
+            transition: all 0.4s ease;
+            cursor: pointer;
+        }
+        .service-card:hover {
+            border-color: var(--dex-red);
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(197, 31, 38, 0.15);
+        }
+
+        .hero-gradient {
+            background: linear-gradient(to bottom, rgba(8,8,8,0.4), rgba(8,8,8,1));
+        }
+
+        .cta-button {
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s ease;
+        }
+        .cta-button::after {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%;
+            width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: 0.5s;
+        }
+        .cta-button:hover::after { left: 100%; }
+
+        #sub-page-view {
+            position: fixed;
+            top: 0;
+            left: 100%;
+            width: 100%;
+            height: 100%;
+            background: #080808;
+            z-index: 200;
+            overflow-y: auto;
+            transition: left 0.6s cubic-bezier(0.85, 0, 0.15, 1);
+        }
+        #sub-page-view.active { left: 0; }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+        .gallery-item {
+            aspect-ratio: 16/10;
+            overflow: hidden;
+            border-radius: 4px;
+            background: #111;
+        }
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.7s ease;
+        }
+        .gallery-item:hover img { transform: scale(1.1); }
+
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #080808; }
+        ::-webkit-scrollbar-thumb { background: var(--dex-red); border-radius: 10px; }
+    </style>
+</head>
+<body class="overflow-x-hidden">
+
+    <div id="sub-page-view">
+        <div id="sub-page-content" class="min-h-screen"></div>
+    </div>
+
+    <!-- Main Navigation -->
+    <nav class="fixed w-full z-50 glass-nav px-6 md:px-12 flex justify-between items-center">
+        <a href="#" class="brand-logo-container">
+            <!-- Main Logo with Error Fallback -->
+            <img src="d_exuberance_logo.png" 
+                 alt="D Exuberance Global" 
+                 id="main-logo"
+                 class="brand-logo-img"
+                 onerror="handleLogoError(this)">
+            
+            <div class="hidden sm:flex flex-col border-l border-white/20 pl-4 py-1">
+                <span class="text-white font-black text-xl tracking-tighter leading-none">D EXUBERANCE</span>
+                <span class="text-dex-red font-bold text-[9px] tracking-[0.4em] uppercase leading-none mt-1">Global Agency</span>
+            </div>
+        </a>
+        
+        <div class="hidden lg:flex gap-10 text-[11px] uppercase tracking-[0.2em] font-bold text-gray-400">
+            <a href="#about" class="hover:text-dex-red transition-colors">About Us</a>
+            <a href="#capabilities" class="hover:text-dex-red transition-colors">Capabilities</a>
+            <a href="#work" class="hover:text-dex-red transition-colors">Case Studies</a>
+            <a href="#contact" class="hover:text-dex-red transition-colors">Contact</a>
+        </div>
+
+        <div class="flex items-center gap-6">
+            <!-- Updated CTA Text -->
+            <a href="#contact" class="cta-button hidden md:block px-6 py-3 bg-dex-red text-white text-[10px] uppercase tracking-widest font-bold rounded-sm">
+                Connect with us
+            </a>
+            <button class="lg:hidden text-white" id="mobile-menu-btn">
+                <i data-lucide="menu"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="relative h-screen flex items-center justify-center px-6 overflow-hidden">
+        <div class="absolute inset-0 z-0">
+            <img src="https://images.unsplash.com/photo-1475721027785-f74eccf877e2?auto=format&fit=crop&q=80" 
+                 alt="Corporate Event Excellence" 
+                 class="w-full h-full object-cover opacity-40 parallax-bg">
+        </div>
+        <div class="absolute inset-0 z-1 hero-gradient"></div>
+        
+        <div class="relative z-10 text-center max-w-6xl">
+            <div class="inline-block px-4 py-1 border border-dex-red/30 mb-8 rounded-full">
+                <p class="text-[10px] uppercase tracking-[0.5em] text-dex-red font-bold">Strategic Global Agency</p>
+            </div>
+            <h1 class="serif text-5xl md:text-9xl leading-[0.9] mb-10 tracking-tighter">
+                Scale Without <br> <span class="italic text-dex-red">Limits.</span>
+            </h1>
+            <p class="text-gray-400 text-lg md:text-xl max-w-2xl mx-auto mb-12 font-light">
+                Engineering high-stakes corporate environments for the world’s most ambitious brands.
+            </p>
+            <div class="flex flex-col md:flex-row gap-6 justify-center items-center">
+                <a href="#about" class="px-12 py-5 bg-white text-black font-extrabold uppercase tracking-widest text-[11px] hover:bg-dex-red hover:text-white transition-all duration-300 shadow-xl">
+                    Discover Our Story
+                </a>
+                <a href="#contact" class="px-12 py-5 border border-white/20 text-white font-extrabold uppercase tracking-widest text-[11px] hover:border-dex-red transition-all duration-300">
+                    Get In Touch
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Us -->
+    <section id="about" class="py-32 bg-white text-black px-6 md:px-12 relative z-10">
+        <div class="max-w-7xl mx-auto grid lg:grid-cols-2 gap-20 items-center">
+            <div class="reveal">
+                <h2 class="text-[11px] uppercase tracking-[0.4em] font-black text-dex-red mb-8">About D Exuberance</h2>
+                <p class="serif text-4xl md:text-6xl leading-[1.1] mb-8">
+                    We translate <span class="text-gray-400 italic">vision</span> into structural <span class="text-dex-red font-bold underline">reality.</span>
+                </p>
+                <div class="w-20 h-1 bg-dex-red mb-8"></div>
+                <p class="text-gray-600 text-xl leading-relaxed font-light mb-6">
+                    D Exuberance (DEX) is a multidisciplinary production powerhouse. We combine strategic rigor with industrial fabrication to deliver unparalleled brand experiences.
+                </p>
+                <p class="text-gray-500 text-lg leading-relaxed font-light">
+                    Led by <strong>Devjaan Paul</strong>, our team navigates the complexities of global MICE and experiential marketing with a focus on impact and execution.
+                </p>
+            </div>
+            <div class="relative reveal" style="transition-delay: 200ms;">
+                <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&q=80" alt="Corporate Headquarters" class="w-full grayscale hover:grayscale-0 transition-all duration-700 shadow-2xl">
+                <div class="absolute -bottom-10 -right-10 bg-dex-red p-12 hidden md:block text-white">
+                    <span class="block text-5xl font-black italic">18+</span>
+                    <p class="text-[10px] uppercase tracking-widest font-bold">Years of Global Excellence</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Capabilities -->
+    <section id="capabilities" class="py-32 px-6 bg-dex-black overflow-hidden">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex flex-col md:flex-row justify-between items-baseline mb-24 gap-6">
+                <h2 class="serif text-5xl md:text-7xl">Core Pillars.</h2>
+                <p class="text-gray-500 uppercase tracking-widest text-xs">Explore our service deep-dives</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-4 text-white">
+                <div class="service-card p-12 reveal" onclick="openSubPage('mice')">
+                    <div class="w-12 h-12 bg-dex-red rounded-full flex items-center justify-center mb-10 text-white">
+                        <i data-lucide="map-pin"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold uppercase tracking-tighter mb-4">Global MICE</h3>
+                    <p class="text-gray-400 text-sm font-light leading-relaxed mb-6">End-to-end logistics for international congresses and incentive programs.</p>
+                    <span class="text-[9px] uppercase tracking-widest text-dex-red font-bold">View Details →</span>
+                </div>
+                <div class="service-card p-12 reveal" style="transition-delay: 100ms;" onclick="openSubPage('experiential')">
+                    <div class="w-12 h-12 bg-white flex items-center justify-center mb-10 text-black">
+                        <i data-lucide="layers"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold uppercase tracking-tighter mb-4">Experiential</h3>
+                    <p class="text-gray-400 text-sm font-light leading-relaxed mb-6">High-fidelity product launches and sensory activations.</p>
+                    <span class="text-[9px] uppercase tracking-widest text-dex-red font-bold">View Details →</span>
+                </div>
+                <div class="service-card p-12 reveal" style="transition-delay: 200ms;" onclick="openSubPage('fabrication')">
+                    <div class="w-12 h-12 bg-dex-red flex items-center justify-center mb-10 text-white">
+                        <i data-lucide="hammer"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold uppercase tracking-tighter mb-4">Fabrication</h3>
+                    <p class="text-gray-400 text-sm font-light leading-relaxed mb-6">Large-scale stage and booth builds engineered in-house.</p>
+                    <span class="text-[9px] uppercase tracking-widest text-dex-red font-bold">View Details →</span>
+                </div>
+                <div class="service-card p-12 reveal" style="transition-delay: 300ms;" onclick="openSubPage('advertising')">
+                    <div class="w-12 h-12 bg-white flex items-center justify-center mb-10 text-black">
+                        <i data-lucide="trending-up"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold uppercase tracking-tighter mb-4">Advertising</h3>
+                    <p class="text-gray-400 text-sm font-light leading-relaxed mb-6">Dominating visual landscapes via transit digital networks.</p>
+                    <span class="text-[9px] uppercase tracking-widest text-dex-red font-bold">View Details →</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact" class="bg-dex-black pt-40 pb-20 px-6 border-t border-dex-red/10">
+        <div class="max-w-7xl mx-auto text-center text-white">
+            <div class="flex justify-center mb-10">
+                <img src="d_exuberance_logo.png" 
+                     alt="D Exuberance Footer Logo" 
+                     class="h-20 opacity-90"
+                     onerror="handleLogoError(this)">
+            </div>
+            <h2 class="serif text-5xl md:text-7xl mb-16">Ready to <span class="text-dex-red italic">Exuberate?</span></h2>
+            <div class="flex flex-col md:flex-row justify-center items-center gap-12 text-gray-500 text-[10px] tracking-[0.3em] uppercase mb-20 font-bold">
+                <a href="mailto:info@dexuberance.com" class="hover:text-dex-red transition-colors">info@dexuberance.com</a>
+                <a href="tel:+919007002294" class="hover:text-dex-red transition-colors">+91-9007002294</a>
+            </div>
+            <div class="pt-20 border-t border-white/5 text-[9px] text-gray-700 tracking-[0.4em] uppercase">
+                © 2024 D Exuberance Global. All Rights Reserved.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+
+        // Handle Broken Logo
+        function handleLogoError(img) {
+            // High-quality SVG Fallback (A minimalist stylized 'D' emblem)
+            img.src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='none'/%3E%3Cpath d='M30 20 H50 C70 20 85 35 85 50 C85 65 70 80 50 80 H30 V20 Z' fill='%23C51F26'/%3E%3Cpath d='M40 30 H50 C60 30 70 40 70 50 C70 60 60 70 50 70 H40 V30 Z' fill='%23080808'/%3E%3C/svg%3E";
+        }
+
+        const pillarData = {
+            mice: {
+                title: "Global MICE",
+                subtitle: "Strategic Logistics & Planning",
+                writeup: "At DEX, we specialize in high-stakes logistical engineering. From corporate board retreats in the Alps to thousand-delegate congresses in Dubai, our MICE division manages the complex interplay between technology, hospitality, and brand strategy. We provide comprehensive sourcing, delegate management, and on-ground execution with military precision.",
+                gallery: [
+                    "https://images.unsplash.com/photo-1540575861501-7ad0582373f2?auto=format&fit=crop&q=80",
+                    "https://images.unsplash.com/photo-1511578314322-379afb476865?auto=format&fit=crop&q=80",
+                    "https://images.unsplash.com/photo-1505373877841-8d25f7d46678?auto=format&fit=crop&q=80",
+                    "https://images.unsplash.com/photo-1475721027785-f74eccf877e2?auto=format&fit=crop&q=80"
+                ]
+            },
+            experiential: {
+                title: "Experiential",
+                subtitle: "The Architecture of Emotion",
+                writeup: "We create immersive environments that force a dialogue between brand and consumer. Our experiential activations move beyond simple display—they are sensory journeys designed to trigger emotional memory. Whether it's a pop-up launch in a metropolitan hub or a digital-first hybrid event, we define the next frontier of engagement.",
+                gallery: [
+                    "https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?auto=format&fit=crop&q=80",
+                    "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?auto=format&fit=crop&q=80",
+                    "https://images.unsplash.com/photo-1514525253344-f81fbf30005d?auto=format&fit=crop&q=80",
+                    "https://images.unsplash.com/photo-1501281668745-f7f57925c3b4?auto=format&fit=crop&q=80"
+                ]
+            },
+            fabrication: {
+                title: "Fabrication",
+                subtitle: "Industrial Design & Build",
+                writeup: "DEX operates its own industrial fabrication units. This allows us to maintain total control over quality and timelines. We engineer large-scale stage sets, bespoke exhibition stalls, and temporary architectural structures. From metalwork to high-end carpentry and lighting integration, we build what others only dare to render.",
+                gallery: [
+                    "https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?auto=format&fit=crop&q=80",
+                    "https://images.unsplash.com/photo-1513828583688-c52646db42da?auto=format&fit=crop&q=80",
+                    "https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&q=80",
+                    "https://images.unsplash.com/photo-1530124566582-a618bc2615ad?auto=format&fit=crop&q=80"
+                ]
+            },
+            advertising: {
+                title: "Advertising",
+                subtitle: "Transit & Digital Networks",
+                writeup: "Our advertising vertical controls premium real estate in high-traffic corridors. We focus on transit-led digital networks and large-format outdoor media. By combining geographic data with impactful creative, we ensure your message doesn't just reach the audience—it stays with them. Strategic placement is our obsession.",
+                gallery: [
+                    "https://images.unsplash.com/photo-1617396900799-f4ec3b43c7ae?auto=format&fit=crop&q=80",
+                    "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?auto=format&fit=crop&q=80",
+                    "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80",
+                    "https://images.unsplash.com/photo-1493612276216-ee3925520721?auto=format&fit=crop&q=80"
+                ]
+            }
+        };
+
+        function openSubPage(key) {
+            const data = pillarData[key];
+            const view = document.getElementById('sub-page-view');
+            const content = document.getElementById('sub-page-content');
+            
+            let galleryHtml = '';
+            data.gallery.forEach(img => {
+                galleryHtml += `
+                    <div class="gallery-item reveal">
+                        <img src="${img}" alt="${data.title} Work">
+                    </div>
+                `;
+            });
+
+            content.innerHTML = `
+                <div class="px-6 py-24 md:px-24 md:py-32 bg-black min-h-screen">
+                    <button onclick="closeSubPage()" class="fixed top-10 right-10 z-[210] p-4 bg-dex-red text-white rounded-full hover:scale-110 transition-transform">
+                        <i data-lucide="x"></i>
+                    </button>
+                    
+                    <div class="max-w-6xl mx-auto">
+                        <div class="mb-20 reveal">
+                            <span class="text-dex-red font-bold text-[10px] uppercase tracking-[0.5em] mb-4 block">${data.subtitle}</span>
+                            <h1 class="serif text-5xl md:text-8xl text-white uppercase tracking-tighter mb-10">${data.title}</h1>
+                            <div class="w-24 h-1 bg-dex-red mb-12"></div>
+                            <p class="text-gray-400 text-xl md:text-2xl font-light leading-relaxed max-w-4xl">
+                                ${data.writeup}
+                            </p>
+                        </div>
+
+                        <div class="mt-24">
+                            <h3 class="text-white font-bold text-xs uppercase tracking-[0.3em] mb-12 flex items-center gap-6">
+                                Project Gallery <span class="h-px flex-1 bg-white/10"></span>
+                            </h3>
+                            <div class="gallery-grid">
+                                ${galleryHtml}
+                            </div>
+                        </div>
+
+                        <div class="mt-32 p-12 bg-white/5 border border-white/10 rounded-sm text-center">
+                            <h3 class="serif text-3xl text-white mb-8">Discuss a project in ${data.title}</h3>
+                            <a href="#contact" onclick="closeSubPage()" class="inline-block px-12 py-5 bg-dex-red text-white font-bold uppercase tracking-widest text-[11px] rounded-sm hover:bg-white hover:text-black transition-all">
+                                Request Strategic Consultation
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            view.classList.add('active');
+            document.body.style.overflow = 'hidden';
+            lucide.createIcons();
+            
+            // Re-observe new content
+            setTimeout(() => {
+                content.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+            }, 100);
+        }
+
+        function closeSubPage() {
+            document.getElementById('sub-page-view').classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) entry.target.classList.add('active');
+            });
+        }, { threshold: 0.1 });
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    </script>
+</body>
+</html>
