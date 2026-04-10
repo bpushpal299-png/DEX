@@ -9,18 +9,26 @@
     <script src="https://unpkg.com/lucide@latest"></script>
     <style>
         :root {
-            --dex-red: #C51F26; 
+            --dex-red: #C51F26;
             --dex-black: #080808;
+            --dex-deep-black: #050505;
             --dex-gray: #1A1A1A;
         }
         body { font-family: 'Inter', sans-serif; background-color: var(--dex-black); color: #F8F9FA; }
         .serif { font-family: 'Playfair Display', serif; }
-        .glass-nav { background: rgba(8, 8, 8, 0.95); backdrop-filter: blur(16px); border-bottom: 1px solid rgba(197, 31, 38, 0.2); }
+        
+        /* Darkened and solidified the nav background */
+        .glass-nav { 
+            background: var(--dex-deep-black); 
+            backdrop-filter: blur(16px); 
+            border-bottom: 1px solid rgba(197, 31, 38, 0.2); 
+        }
         
         .text-dex-red { color: var(--dex-red); }
         .bg-dex-red { background-color: var(--dex-red); }
         .border-dex-red { border-color: var(--dex-red); }
         
+        /* Increased height from 48px to 64px */
         .brand-logo-img {
             height: 64px; 
             width: auto;
@@ -92,11 +100,10 @@
     </div>
 
     <!-- Main Navigation -->
-    <nav class="fixed w-full z-50 glass-nav py-3 px-6 md:px-12 flex justify-between items-center">
+    <nav class="fixed w-full z-50 glass-nav py-2 px-6 md:px-12 flex justify-between items-center">
         <a href="#" class="flex items-center">
-            <!-- Updated Logo Path to GitHub Repository -->
-            <img src="Images/Dexlogo.png"
-                 alt="D Exuberance Logo" 
+            <img src="https://raw.githubusercontent.com/dexuberance/dexuberance.github.io/main/DEX/Images/Dexlogo.png" 
+                 alt="D Exuberance Global Logo" 
                  class="brand-logo-img"
                  onerror="handleLogoError(this)">
         </a>
@@ -109,7 +116,6 @@
         </div>
 
         <div class="flex items-center gap-6">
-            <!-- Changed text to "Connect with us" -->
             <a href="#contact" class="cta-button hidden md:block px-6 py-3 bg-dex-red text-white text-[10px] uppercase tracking-widest font-bold rounded-sm">
                 Connect with us
             </a>
@@ -216,10 +222,9 @@
     <!-- Footer -->
     <footer id="contact" class="bg-dex-black pt-40 pb-20 px-6 border-t border-dex-red/10">
         <div class="max-w-7xl mx-auto text-center">
-            <!-- Footer Logo Path -->
             <img src="https://raw.githubusercontent.com/dexuberance/dexuberance.github.io/main/DEX/Images/Dexlogo.png" 
                  alt="D Exuberance Footer Logo" 
-                 class="h-16 mx-auto mb-10 opacity-80"
+                 class="h-20 mx-auto mb-10 opacity-90"
                  onerror="handleLogoError(this)">
             <h2 class="serif text-5xl md:text-7xl mb-16">Ready to <span class="text-dex-red italic">Exuberate?</span></h2>
             <div class="flex flex-col md:flex-row justify-center items-center gap-12 text-gray-500 text-[10px] tracking-[0.3em] uppercase mb-20 font-bold">
@@ -236,7 +241,6 @@
         lucide.createIcons();
 
         function handleLogoError(img) {
-            // Fallback for missing/broken image path
             img.src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 40'%3E%3Ctext x='5' y='30' font-family='Arial' font-weight='bold' font-size='24' fill='white'%3EDEX%3C/text%3E%3C/svg%3E";
         }
 
