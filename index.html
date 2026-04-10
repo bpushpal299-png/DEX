@@ -95,7 +95,7 @@
     <nav class="fixed w-full z-50 glass-nav py-3 px-6 md:px-12 flex justify-between items-center">
         <a href="#" class="flex items-center">
             <!-- Updated Logo Path to GitHub Repository -->
-            <img src="https://raw.githubusercontent.com/dexuberance/bpushpal299-png.github.io/main/DEX/Images/Dexlogo.png" 
+            <img src="https://raw.githubusercontent.com/dexuberance/dexuberance.github.io/main/DEX/Images/Dexlogo.png" 
                  alt="D Exuberance Global Logo" 
                  class="brand-logo-img"
                  onerror="handleLogoError(this)">
@@ -217,7 +217,7 @@
     <footer id="contact" class="bg-dex-black pt-40 pb-20 px-6 border-t border-dex-red/10">
         <div class="max-w-7xl mx-auto text-center">
             <!-- Footer Logo Path -->
-            <img src="https://raw.githubusercontent.com/dexuberance/bpushpal299-png.github.io/main/DEX/Images/Dexlogo.png" 
+            <img src="https://raw.githubusercontent.com/dexuberance/dexuberance.github.io/main/DEX/Images/Dexlogo.png" 
                  alt="D Exuberance Footer Logo" 
                  class="h-16 mx-auto mb-10 opacity-80"
                  onerror="handleLogoError(this)">
@@ -237,7 +237,7 @@
 
         function handleLogoError(img) {
             // Fallback for missing/broken image path
-            img src="https://raw.githubusercontent.com/dexuberance/bpushpal299-png.github.io/main/DEX/Images/Dexlogo.png" viewBox='0 0 100 40'%3E%3Ctext x='5' y='30' font-family='Arial' font-weight='bold' font-size='24' fill='white'%3EDEX%3C/text%3E%3C/svg%3E";
+            img.src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 40'%3E%3Ctext x='5' y='30' font-family='Arial' font-weight='bold' font-size='24' fill='white'%3EDEX%3C/text%3E%3C/svg%3E";
         }
 
         function openSubPage(key) {
@@ -267,7 +267,4 @@
         document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
     </script>
 </body>
-
 </html>
-
-
